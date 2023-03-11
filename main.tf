@@ -24,15 +24,3 @@ module "vms" {
   vpc_ids        = var.vpc_ids
   script_id      = vultr_startup_script.startup-script[each.key].id
 }
-
-//noinspection HILUnresolvedReference
-locals {
-  all_instances = flatten([
-    for name, batch in module.vms : [
-      for label, data in batch.instances : {
-        label = label
-        data  = data
-      }
-    ]
-  ])
-}
